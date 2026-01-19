@@ -8,7 +8,7 @@ class HomeTown:
     prefecture : Prefecture.Prefecture
     city : City.City
 
-    def __init__(self, prefecture, city):
+    def __init__(self, prefecture : Prefecture.Prefecture, city : City.City):
         if not isinstance(prefecture, Prefecture.Prefecture):
             raise TypeError("引数の型が都道府県でありません")
         if not isinstance(city, City.City):

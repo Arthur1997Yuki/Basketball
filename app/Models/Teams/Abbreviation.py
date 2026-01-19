@@ -5,7 +5,7 @@ class Abbreviation:
 
     abbreviation : str
 
-    def __init__(self, abbreviation):
+    def __init__(self, abbreviation : str):
         
         if not abbreviation :
             raise ValueError("略称は必須です")

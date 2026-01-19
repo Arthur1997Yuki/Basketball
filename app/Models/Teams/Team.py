@@ -16,10 +16,10 @@ class Team:
 
     def __init__(
         self,
-        offical_name,
-        abbreviation,
+        offical_name : OfficalName.OfficalName,
+        abbreviation : Abbreviation.Abbreviation,
         home_town : HomeTown.HomeTown,
-        management_corporation,
+        management_corporation : ManagementCorporation.ManagementCorporation,
         team_id=None,
     ):
         if team_id is not None and not isinstance(team_id, int):

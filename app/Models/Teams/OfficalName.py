@@ -5,7 +5,7 @@ class OfficalName:
     
     offical_name : str
 
-    def __init__(self, offical_name):
+    def __init__(self, offical_name : str):
 
         if not offical_name :
             raise ValueError("正式名称は必須です")

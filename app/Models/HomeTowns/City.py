@@ -25,7 +25,7 @@ class City:
     prefecture : Prefecture.Prefecture
     city : str
 
-    def __init__(self, prefecture, city):
+    def __init__(self, prefecture : Prefecture.Prefecture, city : str):
         
         if not isinstance(prefecture, Prefecture.Prefecture):
             raise TypeError("引数の型が都道府県でありません")

@@ -19,7 +19,7 @@ class Prefecture:
     
     prefecture : str
 
-    def __init__(self, prefecture):
+    def __init__(self, prefecture : str):
         
         if prefecture not in VALID_PREFECTURES :
             raise ValueError(f"{prefecture}は有効な都道府県ではありません")
