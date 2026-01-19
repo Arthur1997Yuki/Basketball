@@ -1,0 +1,14 @@
+@startuml er
+
+entity "チーム" as teams {
+    * チームID : integer <<PK>>
+    --
+    * 正式名称 : varchar
+    * 略称 : varchar
+    * ホームタウン都道府県 : varchar
+    * ホームタウン市町村 : varchar
+    * 運営法人 : varchar
+    登録日時 : datetime
+}
+
+@enduml
