@@ -4,5 +4,5 @@ import Team
 class ITeamRepository(ABC) :
 
     @abstractmethod
-    def save(home_town : Team.Team) :
+    def add(home_town : Team.Team) :
         pass
