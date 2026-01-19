@@ -22,12 +22,12 @@ PREF_CODE_BY_NAME = {
 @dataclass(frozen=True)
 class City:
 
-    prefecture : Prefecture
+    prefecture : Prefecture.Prefecture
     city : str
 
     def __init__(self, prefecture, city):
         
-        if type(prefecture) is not Prefecture:
+        if not isinstance(prefecture, Prefecture.Prefecture):
             raise TypeError("引数の型が都道府県でありません")
         
         if not city:
@@ -36,10 +36,6 @@ class City:
         self._ensure_city_exists(prefecture, city)
 
         self.city = city
-
-    @property
-    def city(self) -> str :
-        return self.city
 
     def _ensure_city_exists(self, prefecture, city):
         api_key = os.getenv("ESTAT_API_KEY")

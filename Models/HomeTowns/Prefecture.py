@@ -22,10 +22,6 @@ class Prefecture:
     def __init__(self, prefecture):
         
         if prefecture not in VALID_PREFECTURES :
-            raise ValueError("f{prefecture}は有効な都道府県ではありません")
+            raise ValueError(f"{prefecture}は有効な都道府県ではありません")
         
         self.prefecture = prefecture
-
-    @property
-    def prefecture(self):
-        return self.prefecture
