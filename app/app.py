@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends
 import uvicorn
 from sqlalchemy.orm import Session
 from sqlalchemy import text
-from .db import get_db
+from .infrastructure.db import get_db
 
 app = FastAPI()
 
