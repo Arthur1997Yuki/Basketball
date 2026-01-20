@@ -16,3 +16,13 @@ export async function fetchTeams(): Promise<Team[]> {
   const res = await apiFetch("/teams");
   return res.json();
 }
+
+export type Division = {
+    id: number;
+    name: string;
+};
+
+export async function fetchDivisions(): Promise<Division[]> {
+    const res = await apiFetch("/divisions");
+    return res.json();
+}
