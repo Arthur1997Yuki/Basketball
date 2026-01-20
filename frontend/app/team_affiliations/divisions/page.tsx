@@ -1,4 +1,4 @@
-import { fetchDivisions } from "@/lib/api";
+import { fetchDivisions } from "@/lib/divisions_api";
 import Link from "next/link";
 
 export default async function TeamsPage() {

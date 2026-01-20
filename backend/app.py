@@ -8,6 +8,7 @@ from backend.Application.Teams.TeamService import TeamsService
 from pydantic import BaseModel
 from backend.Infrastructure.orm import start_mappers, create_tables
 from backend.Application.TeamAffiliations.DivisionService import DivisionService
+from backend.Application.TeamAffiliations.ConferenceService import ConferenceService
 
 class TeamCreateIn(BaseModel):
     official_name: str
@@ -17,6 +18,9 @@ class TeamCreateIn(BaseModel):
     management_corporation: str
 
 class DivisionCreateIn(BaseModel):
+    name: str
+
+class ConferenceCreateIn(BaseModel):
     name: str
 
 app = FastAPI()
@@ -90,7 +94,32 @@ def create_division(
     return {"id" : division.division_id,
             "name" : division.name,
             }
+
+def get_conference_service(uow: UnitOfWork = Depends(get_uow)) :
+    return ConferenceService(uow)
     
+@app.get("/api/conferences")
+def list_conferences(service : ConferenceService = Depends(get_conference_service)):
+    conferences = service.find_all()
+    return [
+        {
+            "id": conference.conference_id,
+            "name": conference.name,
+        }
+        for conference in conferences
+    ]
+
+@app.post("/api/conferences", status_code=201)
+def create_conference(
+    payload: ConferenceCreateIn,
+    service: ConferenceService = Depends(get_conference_service),
+    ):
+    conference = service.create(
+        payload.name,
+    )
+    return {"id" : conference.conference_id,
+            "name" : conference.name,
+            }
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000, log_level="debug")

@@ -1,4 +1,4 @@
-import { fetchTeams } from "@/lib/api";
+import { fetchTeams } from "@/lib/teams_api";
 import Link from "next/link";
 
 export default async function TeamsPage() {
