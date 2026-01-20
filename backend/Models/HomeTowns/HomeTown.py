@@ -1,20 +1,25 @@
 from dataclasses import dataclass
-import Prefecture
-import City
+from backend.Models.HomeTowns.Prefecture import Prefecture
+from backend.Models.HomeTowns.City import City
 
 @dataclass(frozen=True)
 class HomeTown:
 
-    prefecture : Prefecture.Prefecture
-    city : City.City
+    prefecture : Prefecture
+    city : City
 
-    def __init__(self, prefecture : Prefecture.Prefecture, city : City.City):
-        if not isinstance(prefecture, Prefecture.Prefecture):
+    def __post_init__(self):
+        
+        prefecture = self.prefecture
+        city = self.city
+        
+        if not isinstance(prefecture, Prefecture):
             raise TypeError("引数の型が都道府県でありません")
-        if not isinstance(city, City.City):
+        if not isinstance(city, City):
             raise TypeError("引数の型が市区町村でありません")
-        self.prefecture = prefecture
-        self.city = city
+        
+        object.__setattr__(self, "prefecture", prefecture)
+        object.__setattr__(self, "city", city)
 
     @property
     def hometown(self) -> str:

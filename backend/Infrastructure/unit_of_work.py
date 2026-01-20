@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from app.Infrastructure.db import SessionLocal
-from app.Models.Teams.TeamRepository import TeamRepository
+from backend.Infrastructure.db import SessionLocal
+from backend.Models.Teams.TeamRepository import TeamRepository
 
 class UnitOfWork:
     def __enter__(self):

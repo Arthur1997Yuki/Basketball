@@ -5,13 +5,11 @@ class Abbreviation:
 
     abbreviation : str
 
-    def __init__(self, abbreviation : str):
-        
+    def __post_init__(self):
+        abbreviation = self.abbreviation.strip()
+
         if not abbreviation :
             raise ValueError("略称は必須です")
         
-        self.abbreviation = abbreviation
-
-    @property
-    def abbreviation(self) -> str :
-        return self.abbreviation
+        object.__setattr__(self, "abbreviation", abbreviation)
+        

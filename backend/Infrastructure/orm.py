@@ -1,6 +1,6 @@
-from sqlalchemy.orm import registry, mapped_column
-from sqlalchemy import Integer, String, DateTime, Table, MetaData
-from app.Models.Teams import Team
+from sqlalchemy.orm import registry
+from sqlalchemy import Integer, String, DateTime, Table, MetaData, Column
+from backend.Models.Teams.Team import Team
 
 mapper_registry = registry()
 metadata_obj: MetaData = mapper_registry.metadata
@@ -8,14 +8,17 @@ metadata_obj: MetaData = mapper_registry.metadata
 team_table = Table(
     "teams",
     metadata_obj,
-    mapped_column("team_id", Integer, primary_key=True),
-    mapped_column("offical_name", String, nullable=False),
-    mapped_column("abbreviation", String, nullable=False),
-    mapped_column("home_town_prefecture", String, nullable=False),
-    mapped_column("home_town_city", String, nullable=False),
-    mapped_column("management_corporation", String, nullable=False),
-    mapped_column("signup_at", DateTime, nullable=True),
+    Column("team_id", Integer, primary_key=True),
+    Column("official_name", String, nullable=False),
+    Column("abbreviation", String, nullable=False),
+    Column("home_town_prefecture", String, nullable=False),
+    Column("home_town_city", String, nullable=False),
+    Column("management_corporation", String, nullable=False),
+    Column("signup_at", DateTime, nullable=True),
 )
 
 def start_mappers() -> None:
     mapper_registry.map_imperatively(Team, team_table)
+
+def create_tables(engine) -> None:
+    metadata_obj.create_all(bind=engine)

@@ -1,5 +1,5 @@
-import ITeamRepository
-import Team
+from backend.Models.Teams.ITeamRepository import ITeamRepository
+from backend.Models.Teams.Team import Team
 from sqlalchemy.orm import Session
 from sqlalchemy import select, insert, update
 
@@ -10,8 +10,8 @@ class TeamRepository(ITeamRepository):
     def __init__(self, session : Session):
         self.session = session
 
-    def add(self, team : Team.Team) -> None :
+    def add(self, team : Team) -> None :
         self.session.add(team)
 
-    def list(self) -> list[Team.Team]:
-        return list(self.session.scalars(select(Team.Team)).all)
+    def list(self) -> list[Team]:
+        return list(self.session.scalars(select(Team)).all())
