@@ -1,9 +1,4 @@
 from dataclasses import dataclass
-import json
-import os
-import urllib.error
-import urllib.parse
-import urllib.request
 from backend.Models.HomeTowns.Prefecture import Prefecture
 
 
