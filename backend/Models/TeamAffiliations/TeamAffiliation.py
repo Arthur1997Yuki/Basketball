@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from backend.Models.Seasons.Season import Season
 from backend.Models.TeamAffiliations.Division import Division
-from backend.Models.TeamAffiliations.ConferenceName import Conference
+from backend.Models.TeamAffiliations.Conference import Conference
 
 
 @dataclass(frozen=True)
