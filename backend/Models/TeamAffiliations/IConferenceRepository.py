@@ -4,9 +4,9 @@ from backend.Models.TeamAffiliations.Conference import Conference
 class IConferenceRepository(ABC) :
 
     @abstractmethod
-    def add(conference : Conference) :
+    def add(self, conference : Conference) -> None :
         pass
 
     @abstractmethod
-    def list() -> list[Conference] :
+    def list(self) -> list[Conference] :
         pass

@@ -4,9 +4,9 @@ from backend.Models.TeamAffiliations.Division import Division
 class IDivisionRepository(ABC) :
 
     @abstractmethod
-    def add(home_town : Division) :
+    def add(self, division : Division) -> None :
         pass
 
     @abstractmethod
-    def list() -> list[Division] :
+    def list(self) -> list[Division] :
         pass

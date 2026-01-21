@@ -1,27 +1,18 @@
 from fastapi import FastAPI, Depends
 import uvicorn
-from sqlalchemy.orm import Session
 from sqlalchemy import text
 from .Infrastructure.db import get_db, engine
-from .Infrastructure.unit_of_work import UnitOfWork
+from .Infrastructure.uow_factory import get_uow
 from backend.Application.Teams.TeamService import TeamsService
-from pydantic import BaseModel
+from backend.Application.unit_of_work import IUnitOfWork
+from backend.Resources.schemas import (
+    TeamCreateIn,
+    DivisionCreateIn,
+    ConferenceCreateIn,
+)
 from backend.Infrastructure.orm import start_mappers, create_tables
 from backend.Application.TeamAffiliations.DivisionService import DivisionService
 from backend.Application.TeamAffiliations.ConferenceService import ConferenceService
-
-class TeamCreateIn(BaseModel):
-    official_name: str
-    abbreviation: str
-    prefecture: str
-    city: str
-    management_corporation: str
-
-class DivisionCreateIn(BaseModel):
-    name: str
-
-class ConferenceCreateIn(BaseModel):
-    name: str
 
 app = FastAPI()
 
@@ -30,10 +21,7 @@ def on_startup():
     start_mappers()
     create_tables(engine)
 
-def get_uow():
-    return UnitOfWork()
-
-def get_team_service(uow: UnitOfWork = Depends(get_uow)) :
+def get_team_service(uow: IUnitOfWork = Depends(get_uow)) :
     return TeamsService(uow)
 
 @app.get("/api/teams")
@@ -69,7 +57,7 @@ def create_team(
             "management_corporation" : team.management_corporation,
             }
 
-def get_division_service(uow: UnitOfWork = Depends(get_uow)) :
+def get_division_service(uow: IUnitOfWork = Depends(get_uow)) :
     return DivisionService(uow)
 
 @app.get("/api/divisions")
@@ -95,7 +83,7 @@ def create_division(
             "name" : division.name,
             }
 
-def get_conference_service(uow: UnitOfWork = Depends(get_uow)) :
+def get_conference_service(uow: IUnitOfWork = Depends(get_uow)) :
     return ConferenceService(uow)
     
 @app.get("/api/conferences")

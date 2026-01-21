@@ -4,9 +4,9 @@ from backend.Models.Teams.Team import Team
 class ITeamRepository(ABC) :
 
     @abstractmethod
-    def add(home_town : Team) :
+    def add(self, team : Team) -> None :
         pass
 
     @abstractmethod
-    def list() -> list[Team] :
+    def list(self) -> list[Team] :
         pass

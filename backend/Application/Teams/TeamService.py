@@ -1,13 +1,13 @@
 from backend.Models.Teams import OfficialName, Team, Abbreviation, ManagementCorporation
 from backend.Models.HomeTowns import Prefecture, City, HomeTown
-from backend.Infrastructure.unit_of_work import UnitOfWork
+from backend.Application.unit_of_work import IUnitOfWork
 from backend.Application.HomeTowns import HomeTownService
 
 class TeamsService:
 
-    uow : UnitOfWork
+    uow : IUnitOfWork
 
-    def __init__(self, uow: UnitOfWork):
+    def __init__(self, uow: IUnitOfWork):
         self.uow = uow
 
 
@@ -17,15 +17,19 @@ class TeamsService:
             
             abbreviation = Abbreviation.Abbreviation(team_abbreviation)
             
-            home_town = HomeTownService.create_hometown(team_prefecuture, team_city)
+            home_town = HomeTownService.create_hometown(
+                team_prefecuture,
+                team_city,
+                uow.city_masters,
+            )
             
             management_corporation = ManagementCorporation.ManagementCorporation(team_management_corporation)
             
             team = Team.Team(official_name, abbreviation, home_town, management_corporation)
             
             uow.teams.add(team)
-            uow.session.flush()
-            uow.session.refresh(team)
+            uow.flush()
+            uow.refresh(team)
 
             return team
         

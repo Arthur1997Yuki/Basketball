@@ -1,12 +1,12 @@
-from backend.Infrastructure.unit_of_work import UnitOfWork
+from backend.Application.unit_of_work import IUnitOfWork
 from backend.Models.TeamAffiliations.Conference import Conference
 from backend.Models.TeamAffiliations.ConferenceName import ConferenceName
 
 class ConferenceService:
 
-    uow : UnitOfWork
+    uow : IUnitOfWork
 
-    def __init__(self, uow: UnitOfWork):
+    def __init__(self, uow: IUnitOfWork):
         self.uow = uow
 
     def create(self, conference_name) :
@@ -15,8 +15,8 @@ class ConferenceService:
             conference = Conference(ConferenceName(conference_name))
 
             uow.conferences.add(conference)
-            uow.session.flush()
-            uow.session.refresh(conference)
+            uow.flush()
+            uow.refresh(conference)
 
             return conference
 

@@ -2,6 +2,7 @@ import csv
 from functools import lru_cache
 from pathlib import Path
 from backend.Infrastructure.Masters.normalization import norm_name
+from backend.Application.HomeTowns.ICityMasterRepository import ICityMasterRepository
 
 @lru_cache(maxsize=1)
 def load_city_names_by_pref2(csv_path: str) -> dict[str, set[str]]:
@@ -44,3 +45,15 @@ def load_city_names_by_pref2(csv_path: str) -> dict[str, set[str]]:
             m.setdefault(pref2, set()).add(norm_name(name))
 
         return m
+
+
+DEFAULT_CSV_PATH = Path(__file__).resolve().parents[2] / "Resources" / "municipalities.csv"
+
+
+class CityMasterRepository(ICityMasterRepository):
+    def __init__(self, csv_path: str | Path = DEFAULT_CSV_PATH) -> None:
+        self.csv_path = str(csv_path)
+
+    def get_city_names_by_pref2(self, pref2: str) -> set[str] | None:
+        city_map = load_city_names_by_pref2(self.csv_path)
+        return city_map.get(pref2)

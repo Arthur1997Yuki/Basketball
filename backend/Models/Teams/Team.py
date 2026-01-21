@@ -25,7 +25,7 @@ class Team:
         if team_id is not None and not isinstance(team_id, int):
             raise TypeError("チームIDは整数で指定してください。")
         self.team_id = team_id
-        self.official_name = official_name.offical_name if isinstance(official_name, OfficialName) else official_name
+        self.official_name = official_name.official_name if isinstance(official_name, OfficialName) else official_name
         self.abbreviation = abbreviation.abbreviation if isinstance(abbreviation, Abbreviation) else abbreviation
         self.home_town_prefecture = home_town.prefecture.prefecture
         self.home_town_city = home_town.city.city

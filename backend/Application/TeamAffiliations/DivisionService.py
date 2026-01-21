@@ -1,12 +1,12 @@
-from backend.Infrastructure.unit_of_work import UnitOfWork
+from backend.Application.unit_of_work import IUnitOfWork
 from backend.Models.TeamAffiliations.Division import Division
 from backend.Models.TeamAffiliations.DivisionName import DivisionName
 
 class DivisionService:
 
-    uow : UnitOfWork
+    uow : IUnitOfWork
 
-    def __init__(self, uow: UnitOfWork):
+    def __init__(self, uow: IUnitOfWork):
         self.uow = uow
 
     def create(self, division_name) :
@@ -15,8 +15,8 @@ class DivisionService:
             division = Division(DivisionName(division_name))
 
             uow.divisions.add(division)
-            uow.session.flush()
-            uow.session.refresh(division)
+            uow.flush()
+            uow.refresh(division)
 
             return division
     

@@ -1,7 +1,7 @@
 from backend.Models.Teams.ITeamRepository import ITeamRepository
 from backend.Models.Teams.Team import Team
 from sqlalchemy.orm import Session
-from sqlalchemy import select, insert, update, delete
+from sqlalchemy import select, update, delete
 
 class TeamRepository(ITeamRepository):
 
