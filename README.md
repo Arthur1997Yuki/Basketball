@@ -4,10 +4,11 @@ FastAPI + PostgreSQL のバックエンドと、Next.js のフロントエンド
 
 ## 構成
 
-- `backend/` FastAPI アプリ
-- `frontend/` Next.js アプリ
+- `apps/api-fastapi/` FastAPI アプリ（旧 backend）
+- `apps/web-next/` Next.js アプリ（旧 frontend）
+- `apps/crm-rails-api/` Rails API（新規）
 - `migrations/` Alembic マイグレーション
-- `document/` 設計ドキュメント類
+- `docs/` 設計ドキュメント類
 
 ## 前提
 
@@ -19,7 +20,7 @@ FastAPI + PostgreSQL のバックエンドと、Next.js のフロントエンド
 
 ### 1) データベース
 
-`backend/Infrastructure/db.py` の `DATABASE_URL` に合わせて DB を用意してください。
+`apps/api-fastapi/Infrastructure/db.py` の `DATABASE_URL` に合わせて DB を用意してください。
 デフォルトは以下です。
 
 ```
@@ -34,7 +35,7 @@ postgresql+psycopg://nwaba:david@127.0.0.1:5432/basketball_db
 python -m venv venv
 source venv/bin/activate
 pip install fastapi uvicorn sqlalchemy psycopg
-python -m backend.app
+uvicorn app:app --app-dir apps/api-fastapi --reload
 ```
 
 起動時にテーブルを自動作成します。API は `http://127.0.0.1:8000` で提供されます。
@@ -42,7 +43,7 @@ python -m backend.app
 ### 3) フロントエンド
 
 ```
-cd frontend
+cd apps/web-next
 npm install
 npm run dev
 ```
@@ -60,5 +61,5 @@ npm run dev
 
 ## 開発メモ
 
-- DB 接続設定は `backend/Infrastructure/db.py` を参照してください。
+- DB 接続設定は `apps/api-fastapi/Infrastructure/db.py` を参照してください。
 - 既存データの管理は Alembic を利用できます（`migrations/`, `alembic.ini`）。
