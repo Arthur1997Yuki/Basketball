@@ -4,11 +4,11 @@ FastAPI + PostgreSQL のバックエンドと、Next.js のフロントエンド
 
 ## 構成
 
-- `apps/api-fastapi/` FastAPI アプリ（旧 backend）
-- `apps/web-next/` Next.js アプリ（旧 frontend）
-- `apps/crm-rails-api/` Rails API（新規）
+- `apps/api-fastapi/` FastAPI + SQLAlchemy API
+- `apps/web-next/` Next.js フロントエンド（App Router）
 - `migrations/` Alembic マイグレーション
 - `docs/` 設計ドキュメント類
+- `frontend/` （現在は空）
 
 ## 前提
 
@@ -20,14 +20,12 @@ FastAPI + PostgreSQL のバックエンドと、Next.js のフロントエンド
 
 ### 1) データベース
 
-`apps/api-fastapi/Infrastructure/db.py` の `DATABASE_URL` に合わせて DB を用意してください。
+`apps/api-fastapi/Infrastructure/db.py` と `alembic.ini` の接続設定を環境に合わせて更新してください。
 デフォルトは以下です。
 
 ```
 postgresql+psycopg://nwaba:david@127.0.0.1:5432/basketball_db
 ```
-
-必要に応じてユーザー/パスワード/DB 名を変更してください。
 
 ### 2) バックエンド
 
@@ -48,18 +46,26 @@ npm install
 npm run dev
 ```
 
-`http://127.0.0.1:3000` で起動します。`/api/*` は `next.config.ts` のリライトでバックエンドに転送されます。
+`http://127.0.0.1:3000` で起動します。`/api/*` は `apps/web-next/next.config.ts` のリライトでバックエンドに転送されます。
 
 ## 主な API
 
 - `GET /api/teams`
+- `GET /api/teams/{team_id}`
 - `POST /api/teams`
 - `GET /api/divisions`
+- `GET /api/divisions/{division_id}`
 - `POST /api/divisions`
 - `GET /api/conferences`
+- `GET /api/conferences/{conference_id}`
 - `POST /api/conferences`
+- `GET /api/seasons`
+- `GET /api/seasons/{season_id}`
+- `POST /api/seasons`
+- `GET /api/team_affiliations`
+- `POST /api/team_affiliations`
 
 ## 開発メモ
 
-- DB 接続設定は `apps/api-fastapi/Infrastructure/db.py` を参照してください。
-- 既存データの管理は Alembic を利用できます（`migrations/`, `alembic.ini`）。
+- DB 接続設定は `apps/api-fastapi/Infrastructure/db.py` と `alembic.ini` を参照してください。
+- マイグレーションは `migrations/README.md` を参照してください。

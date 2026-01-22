@@ -1,27 +1,27 @@
 # apps
 
-各アプリケーションのルートをまとめたディレクトリです。
+アプリケーションの実体をまとめたディレクトリです。
 
 ## サブディレクトリ
-- `api-fastapi`: FastAPI + SQLAlchemy のAPI
-- `web-next`: Next.js フロントエンド
-- `crm-rails-api`: Rails API用のプレースホルダー（現在は空）
+
+- `api-fastapi/` FastAPI + SQLAlchemy API
+- `web-next/` Next.js フロントエンド
 
 ## セットアップと実行
+
 ### api-fastapi
-1. Postgresを起動しDBを作成します。
+
+1. Postgres を起動し DB を作成します。
 2. `apps/api-fastapi/Infrastructure/db.py` の `DATABASE_URL` を環境に合わせて更新します。
-3. 依存関係をインストールします（requirementsファイルは未配置）。
-   例: `pip install fastapi uvicorn sqlalchemy psycopg alembic`
-4. 起動します（`apps/api-fastapi` で実行）。
-   例: `uvicorn app:app --reload`
-5. 主なエンドポイント: `/api/teams`, `/api/divisions`, `/api/conferences`
+3. 依存関係をインストールします（requirements ファイルは未配置）。
+   例: `pip install fastapi uvicorn sqlalchemy psycopg`
+4. 起動します。
+   例: `uvicorn app:app --app-dir apps/api-fastapi --reload`
+5. 主なエンドポイントは `README.md` を参照してください。
 
 ### web-next
+
 1. `npm install`
-2. `npm run dev`（http://localhost:3000）
+2. `npm run dev`（http://127.0.0.1:3000）
 
 詳細は `apps/web-next/README.md` を参照してください。
-
-### crm-rails-api
-現在は空のディレクトリです。API追加時にセットアップ手順を記載します。
