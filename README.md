@@ -2,6 +2,29 @@
 
 FastAPI + PostgreSQL のバックエンドと、Next.js のフロントエンドで構成されたバスケットボール情報管理のサンプルです。
 
+## 技術概要（簡易）
+
+- FastAPI: Python 製の高速な Web API フレームワーク。型ヒントを使って自動ドキュメント（OpenAPI）を生成できます。
+- SQLAlchemy: Python の ORM。Python のクラスと DB テーブルを対応づけます。
+- Alembic: SQLAlchemy 用のマイグレーションツール。スキーマ変更を履歴管理します。
+- Next.js: React ベースのフルスタックフレームワーク。App Router でルーティング/SSR/静的生成を扱えます。
+- PostgreSQL: オープンソースの RDB。信頼性が高く、拡張性に優れます。
+
+## 技術選定の理由（簡易）
+
+- FastAPI: 型ヒントと自動ドキュメントにより API の設計/実装/確認がしやすい。
+- SQLAlchemy: Python での DB 抽象化ができ、テストや変更に強い。
+- Alembic: スキーマ変更の履歴管理がしやすく、ロールバックも可能。
+- Next.js: ルーティングやビルドが統合され、フロント実装が簡潔になる。
+- PostgreSQL: RDB として機能が豊富で運用実績が多い。
+
+## 用語集（簡易）
+
+- ORM: オブジェクトと DB テーブルを対応づける仕組み。
+- マイグレーション: DB スキーマ変更を履歴として管理する仕組み。
+- App Router: Next.js のファイルベースルーティング（`app/` ディレクトリ）。
+- UoW（Unit of Work）: 複数の DB 操作を 1 つのトランザクションとして扱う設計パターン。
+
 ## 構成
 
 - `apps/api-fastapi/` FastAPI + SQLAlchemy API
