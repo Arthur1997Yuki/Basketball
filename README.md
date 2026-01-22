@@ -69,3 +69,48 @@ npm run dev
 
 - DB 接続設定は `apps/api-fastapi/Infrastructure/db.py` と `alembic.ini` を参照してください。
 - マイグレーションは `migrations/README.md` を参照してください。
+
+## ドメインモデル追加時の改修手順（バックエンド→フロントエンド）
+
+### バックエンド
+
+1. `apps/api-fastapi/Models/` に新しいモデル（エンティティ/値オブジェクト）を追加します。
+2. 必要に応じてリポジトリ IF を `apps/api-fastapi/Models/*` に追加します。
+3. `apps/api-fastapi/Infrastructure/orm/` にテーブル定義を追加します。
+4. `apps/api-fastapi/Infrastructure/orm/__init__.py` のマッピングに追加します。
+5. リポジトリ実装を `apps/api-fastapi/Infrastructure/Repositories/` に追加します。
+6. ユースケースを `apps/api-fastapi/Application/` に追加し、サービスから利用します。
+7. API 入出力スキーマを `apps/api-fastapi/Resources/schemas.py` に追加します。
+8. エンドポイントを `apps/api-fastapi/app.py` に追加します。
+9. マイグレーション運用を行う場合は `migrations/` を更新します。
+
+### フロントエンド
+
+1. API に合わせて `apps/web-next/app/` にページ/ルートを追加します。
+2. データ取得のユーティリティを `apps/web-next/lib/` に追加/拡張します。
+3. 画面で必要な表示/入力 UI を実装します。
+
+### 具体例（TeamAffiliation を追加する場合）
+
+バックエンド側:
+
+- `apps/api-fastapi/Models/TeamAffiliations/` にモデルと IF を追加
+- `apps/api-fastapi/Infrastructure/orm/team_affiliations.py` にテーブル定義を追加
+- `apps/api-fastapi/Infrastructure/orm/__init__.py` にマッピングを追加
+- `apps/api-fastapi/Infrastructure/Repositories/TeamAffiliationRepository.py` を追加
+- `apps/api-fastapi/Application/TeamAffiliations/TeamAffiliationService.py` を追加
+- `apps/api-fastapi/Resources/schemas.py` に入力/出力スキーマを追加
+- `apps/api-fastapi/app.py` に `/api/team_affiliations` を追加
+
+フロントエンド側:
+
+- `apps/web-next/app/` に一覧/登録ページを追加
+- `apps/web-next/lib/` に取得/登録用関数を追加
+
+### マイグレーション運用の流れ（Alembic）
+
+1. `alembic.ini` の `sqlalchemy.url` を設定します。
+2. `migrations/env.py` の `target_metadata` に対象メタデータを設定します。
+3. `alembic revision --autogenerate -m "add team affiliations"` を実行します。
+4. `alembic upgrade head` を実行します。
+5. 必要なら `alembic downgrade -1` で直前の変更を戻します。
