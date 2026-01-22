@@ -10,3 +10,7 @@ class ISeasonRepository(ABC) :
     @abstractmethod
     def list(self) -> list[Season] :
         pass
+
+    @abstractmethod
+    def get_by_id(self, season_id : int) -> Season | None :
+        pass

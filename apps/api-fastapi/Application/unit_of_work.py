@@ -8,10 +8,12 @@ from Models.TeamAffiliations.IDivisionRepository import IDivisionRepository
 from Models.TeamAffiliations.IConferenceRepository import IConferenceRepository
 from Models.Seasons.ISeasonRepository import ISeasonRepository
 from Application.HomeTowns.ICityMasterRepository import ICityMasterRepository
+from Models.TeamAffiliations.ITeamAffiliationRepository import ITeamAffiliationRepository
 
 
 class IUnitOfWork(ABC):
     teams: ITeamRepository
+    team_affiliations: ITeamAffiliationRepository
     divisions: IDivisionRepository
     conferences: IConferenceRepository
     seasons: ISeasonRepository

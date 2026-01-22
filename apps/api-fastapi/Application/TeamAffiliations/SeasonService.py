@@ -24,3 +24,8 @@ class SeasonService:
         with self.uow as uow:
             seasons = uow.seasons.list()
             return seasons
+
+    def find_by_id(self, season_id : int) -> Season | None :
+        with self.uow as uow:
+            season = uow.seasons.get_by_id(season_id)
+            return season

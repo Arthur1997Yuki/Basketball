@@ -10,3 +10,7 @@ class IConferenceRepository(ABC) :
     @abstractmethod
     def list(self) -> list[Conference] :
         pass
+
+    @abstractmethod
+    def get_by_id(self, conference_id : int) -> Conference | None :
+        pass

@@ -13,3 +13,8 @@ export async function fetchDivisions(): Promise<Division[]> {
     const res = await apiFetch("/divisions");
     return res.json();
 }
+
+export async function fetchDivisionById(id: number): Promise<Division> {
+    const res = await apiFetch(`/divisions/${id}`);
+    return res.json();
+}

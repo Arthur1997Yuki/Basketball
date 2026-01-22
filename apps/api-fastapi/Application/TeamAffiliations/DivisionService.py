@@ -24,3 +24,8 @@ class DivisionService:
         with self.uow as uow:
             divisions = uow.divisions.list()
             return divisions
+
+    def find_by_id(self, division_id : int) -> Division | None :
+        with self.uow as uow:
+            division = uow.divisions.get_by_id(division_id)
+            return division

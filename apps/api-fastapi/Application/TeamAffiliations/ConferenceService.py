@@ -24,3 +24,8 @@ class ConferenceService:
         with self.uow as uow:
             conferences = uow.conferences.list()
             return conferences
+
+    def find_by_id(self, conference_id : int) -> Conference | None :
+        with self.uow as uow:
+            conference = uow.conferences.get_by_id(conference_id)
+            return conference

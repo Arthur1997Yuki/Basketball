@@ -15,7 +15,10 @@ class TeamRepository(ITeamRepository):
 
     def list(self) -> list[Team]:
         return list(self.session.scalars(select(Team)).all())
-    
+
+    def get_by_id(self, id: int) -> Team | None:
+        return self.session.get(Team, id)
+
     def update(self, team_id : int, new_team : Team) -> None :
         stmt = (
             update(Team).

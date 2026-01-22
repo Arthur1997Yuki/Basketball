@@ -10,3 +10,7 @@ class IDivisionRepository(ABC) :
     @abstractmethod
     def list(self) -> list[Division] :
         pass
+
+    @abstractmethod
+    def get_by_id(self, division_id : int) -> Division | None :
+        pass

@@ -17,3 +17,8 @@ export async function fetchTeams(): Promise<Team[]> {
   return res.json();
 }
 
+export async function fetchTeamById(id: number): Promise<Team> {
+  const res = await apiFetch(`/teams/${id}`);
+  return res.json();
+}
+

@@ -15,3 +15,6 @@ class DivisionRepository(IDivisionRepository):
 
     def list(self) -> list[Division] :
         return self.session.scalars(select(Division)).all()
+    
+    def get_by_id(self, id: int) -> Division | None:
+        return self.session.get(Division, id)

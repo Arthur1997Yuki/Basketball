@@ -15,3 +15,8 @@ export async function fetchSeasons(): Promise<Season[]> {
     const res = await apiFetch("/seasons");
     return res.json();
 }
+
+export async function fetchSeasonById(id: number): Promise<Season> {
+    const res = await apiFetch(`/seasons/${id}`);
+    return res.json();
+}

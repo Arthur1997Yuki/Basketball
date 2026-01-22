@@ -13,3 +13,8 @@ export async function fetchConferences(): Promise<Conference[]> {
     const res = await apiFetch("/conferences");
     return res.json();
 }
+
+export async function fetchConferenceById(id: number): Promise<Conference> {
+    const res = await apiFetch(`/conferences/${id}`);
+    return res.json();
+}

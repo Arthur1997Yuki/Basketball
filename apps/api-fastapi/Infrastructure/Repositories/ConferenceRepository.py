@@ -15,3 +15,6 @@ class ConferenceRepository(IConferenceRepository):
 
     def list(self) -> list[Conference] :
         return self.session.scalars(select(Conference)).all()
+    
+    def get_by_id(self, id: int) -> Conference | None:
+        return self.session.get(Conference, id)

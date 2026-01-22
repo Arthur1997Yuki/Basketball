@@ -11,4 +11,39 @@ entity "チーム" as teams {
     登録日時 : datetime
 }
 
+entity "チーム所属情報" as team_affiliations {
+    * チーム所属情報ID : integer <<PK>>
+    --
+    * チームID : integer <<FK>>
+    * ディビジョンID : integer <<FK>>
+    * カンファレンスID : integer <<FK>>
+    * シーズンID : integer <<FK>>
+    登録日時 : datetime
+}
+entity "ディビジョン" as divisions {
+    * ディビジョンID : integer <<PK>>
+    --
+    * ディビジョン名 : varchar
+    登録日時 : datetime
+}
+entity "カンファレンス" as conferences {
+    * カンファレンスID : integer <<PK>>
+    --
+    * カンファレンス名 : varchar
+    登録日時 : datetime
+}
+entity "シーズン" as seasons {
+    * シーズンID : integer <<PK>>
+    --
+    * シーズン名 : varchar
+    * 開始年 : date
+    * 終了年 : date
+    登録日時 : datetime
+}
+
+teams ||..|| team_affiliations : has
+divisions ||..|| team_affiliations : has
+conferences ||..|| team_affiliations : has
+seasons ||..|| team_affiliations : has
+
 @enduml

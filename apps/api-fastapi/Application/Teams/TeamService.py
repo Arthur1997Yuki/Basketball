@@ -36,3 +36,8 @@ class TeamsService:
     def find_all(self):
         with self.uow as uow:
             return uow.teams.list()
+        
+    def find_by_id(self, team_id : int) -> Team.Team | None :
+        with self.uow as uow:
+            team = uow.teams.get_by_id(team_id)
+            return team

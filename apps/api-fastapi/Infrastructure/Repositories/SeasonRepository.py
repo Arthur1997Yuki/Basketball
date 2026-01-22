@@ -15,3 +15,6 @@ class SeasonRepository(ISeasonRepository):
 
     def list(self) -> list[Season] :
         return self.session.scalars(select(Season)).all()
+    
+    def get_by_id(self, id: int) -> Season | None:
+        return self.session.get(Season, id)

@@ -21,3 +21,9 @@ class SeasonCreateIn(BaseModel):
     name: str
     start_date: date
     end_date: date
+
+class TeamAffiliationCreateIn(BaseModel):
+    team_id: int
+    division_id: int
+    conference_id: int
+    season_id: int

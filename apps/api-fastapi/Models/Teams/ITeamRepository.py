@@ -10,3 +10,7 @@ class ITeamRepository(ABC) :
     @abstractmethod
     def list(self) -> list[Team] :
         pass
+
+    @abstractmethod
+    def get_by_id(self, id: int) -> Team | None :
+        pass
