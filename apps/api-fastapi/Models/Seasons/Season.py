@@ -5,12 +5,12 @@ from Models.Seasons.SeasonName import SeasonName
 class Season:
 
     season_id : int
-    season_name : str
+    name : str
     start_date : date
     end_date : date
 
-    def __post_init__(self, season_id : int, season_name : SeasonName, start_date : date, end_date : date):
-        if not isinstance(season_id, int):
+    def __init__(self, season_name : SeasonName, start_date : date, end_date : date, season_id=None):
+        if season_id is not None and not isinstance(season_id, int):
             raise TypeError("シーズンIDは整数で指定してください。")
         
         if not isinstance(season_name, SeasonName):
@@ -26,6 +26,6 @@ class Season:
             raise ValueError("開始日は終了日より前の日付を指定してください。")
 
         self.season_id = season_id
-        self.season_name = season_name.season_name
+        self.name = season_name.season_name
         self.start_date = start_date
         self.end_date = end_date

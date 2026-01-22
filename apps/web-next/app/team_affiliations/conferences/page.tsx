@@ -1,7 +1,7 @@
 import { fetchConferences } from "@/lib/conferences_api";
 import Link from "next/link";
 
-export default async function TeamsPage() {
+export default async function ConferencesPage() {
   const conferences = await fetchConferences();
     return (
     <main style={{ padding: 24 }}>

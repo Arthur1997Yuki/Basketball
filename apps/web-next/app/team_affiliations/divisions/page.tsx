@@ -1,7 +1,7 @@
 import { fetchDivisions } from "@/lib/divisions_api";
 import Link from "next/link";
 
-export default async function TeamsPage() {
+export default async function DivisionsPage() {
   const divisions = await fetchDivisions();
     return (
     <main style={{ padding: 24 }}>

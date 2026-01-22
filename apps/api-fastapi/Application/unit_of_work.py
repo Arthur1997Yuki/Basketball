@@ -6,6 +6,7 @@ from typing import Any
 from Models.Teams.ITeamRepository import ITeamRepository
 from Models.TeamAffiliations.IDivisionRepository import IDivisionRepository
 from Models.TeamAffiliations.IConferenceRepository import IConferenceRepository
+from Models.Seasons.ISeasonRepository import ISeasonRepository
 from Application.HomeTowns.ICityMasterRepository import ICityMasterRepository
 
 
@@ -13,6 +14,7 @@ class IUnitOfWork(ABC):
     teams: ITeamRepository
     divisions: IDivisionRepository
     conferences: IConferenceRepository
+    seasons: ISeasonRepository
     city_masters: ICityMasterRepository
 
     def __enter__(self) -> "IUnitOfWork":

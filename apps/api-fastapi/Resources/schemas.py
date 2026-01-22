@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from datetime import date
 
 
 class TeamCreateIn(BaseModel):
@@ -15,3 +16,8 @@ class DivisionCreateIn(BaseModel):
 
 class ConferenceCreateIn(BaseModel):
     name: str
+
+class SeasonCreateIn(BaseModel):
+    name: str
+    start_date: date
+    end_date: date

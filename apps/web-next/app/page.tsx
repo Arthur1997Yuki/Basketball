@@ -8,6 +8,7 @@ export default function Home() {
         <Link href="/teams">チーム</Link><br />
         <Link href="/team_affiliations/conferences">カンファレンス</Link><br />
         <Link href="/team_affiliations/divisions">ディビジョン</Link><br />
+        <Link href="/team_affiliations/seasons">シーズン</Link><br />
       </p>
     </main>
   );

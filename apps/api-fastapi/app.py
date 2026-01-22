@@ -9,10 +9,12 @@ from Resources.schemas import (
     TeamCreateIn,
     DivisionCreateIn,
     ConferenceCreateIn,
+    SeasonCreateIn
 )
 from Infrastructure.orm import start_mappers, create_tables
 from Application.TeamAffiliations.DivisionService import DivisionService
 from Application.TeamAffiliations.ConferenceService import ConferenceService
+from Application.TeamAffiliations.SeasonService import SeasonService
 
 app = FastAPI()
 
@@ -107,6 +109,38 @@ def create_conference(
     )
     return {"id" : conference.conference_id,
             "name" : conference.name,
+            }
+
+def get_season_service(uow: IUnitOfWork = Depends(get_uow)) :
+    return SeasonService(uow)
+
+@app.get("/api/seasons")
+def list_seasons(service : SeasonService = Depends(get_season_service)):
+    seasons = service.find_all()
+    return [
+        {
+            "id": season.season_id,
+            "name": season.name,
+            "start_date": season.start_date,
+            "end_date": season.end_date,
+        }
+        for season in seasons
+    ]
+
+@app.post("/api/seasons", status_code=201)
+def create_season(
+    payload: SeasonCreateIn,
+    service: SeasonService = Depends(get_season_service),
+    ):
+    season = service.create(
+        payload.name,
+        payload.start_date,
+        payload.end_date,
+    )
+    return {"id" : season.season_id,
+            "name" : season.name,
+            "start_date": season.start_date,
+            "end_date": season.end_date,
             }
 
 if __name__ == "__main__":

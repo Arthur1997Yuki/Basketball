@@ -4,6 +4,7 @@ from Infrastructure.db import SessionLocal
 from Infrastructure.Repositories.TeamRepository import TeamRepository
 from Infrastructure.Repositories.DivisionRepository import DivisionRepository
 from Infrastructure.Repositories.ConferenceRepository import ConferenceRepository
+from Infrastructure.Repositories.SeasonRepository import SeasonRepository
 from Infrastructure.Masters.city_master_repository import CityMasterRepository
 
 class UnitOfWork(IUnitOfWork):
@@ -12,6 +13,7 @@ class UnitOfWork(IUnitOfWork):
         self.teams = TeamRepository(self.session)
         self.conferences = ConferenceRepository(self.session)
         self.divisions = DivisionRepository(self.session)
+        self.seasons = SeasonRepository(self.session)
         self.city_masters = CityMasterRepository()
         return self
 
